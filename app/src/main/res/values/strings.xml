@@ -2,5 +2,7 @@
     <string name="app_name">brightskies</string>
     <string name="discover_your_bright_skies">Discover Your Bright Skies</string>
     <string name="bright_skies">Bright Skies</string>
-
+    <string name="image_description">Image</string>
+    <string name="title_activity_map_page">Map</string>
+    <string name="enter_location">Enter Your Location</string>
 </resources>
