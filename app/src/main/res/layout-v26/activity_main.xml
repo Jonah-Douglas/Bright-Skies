@@ -31,6 +31,7 @@
         android:fontFamily="casual"
         android:inputType="textPersonName"
         android:text="@string/bright_skies"
+        android:textAllCaps="true"
         android:textColor="#00BCD4"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

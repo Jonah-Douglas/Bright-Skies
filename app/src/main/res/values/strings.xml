@@ -5,4 +5,5 @@
     <string name="image_description">Image</string>
     <string name="title_activity_map_page">Map</string>
     <string name="enter_location">Enter Your Location</string>
+    <string name="navigation">nav</string>
 </resources>
