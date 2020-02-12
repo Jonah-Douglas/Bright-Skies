@@ -55,6 +55,6 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/solar_test" />
+        app:srcCompat="@drawable/solar_test2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
