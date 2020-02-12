@@ -12,5 +12,13 @@
     <string name="information">Information</string>
     <string name="faqs">FAQs</string>
     <string name="about_us">About Us</string>
+    <string name="location_results">Location Results</string>
     <string name="temporary_text">Temporary Text</string>
+    <string name="about_us_page1">Comprised of Zack Doll, Jonah Douglas, Melody Grappo, and Piper Wolters,
+        our team was formed in Winter 2020 at Western Washington University.</string>
+    <string name="about_us_page2">We are passionate individuals about computer science and the planet. We hope to use
+        technology to change the world for the better. This application is part of that goal.</string>
+    <string name="about_us_page3">This app aims to inform users about solar energy and their solar potential,
+        and ultimately encourages more people to switch to this renewable energy source.</string>
+    <string name="about_us_page4">Please contact brightskies@gmail.com if you encounter any issues with this app.</string>
 </resources>
