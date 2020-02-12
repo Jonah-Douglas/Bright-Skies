@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".LocationResultsActivity"></activity>
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".FAQsActivity" />
         <activity android:name=".InformationActivity" />
         <activity android:name=".EnergyCalculatorActivity" />

@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="232dp"
         android:layout_height="91dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="casual"
         android:text="@string/bright_skies"
         android:textAlignment="center"

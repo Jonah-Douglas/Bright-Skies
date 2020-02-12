@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="232dp"
         android:layout_height="91dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="casual"
         android:text="@string/bright_skies"
         android:textAlignment="center"
@@ -53,12 +53,15 @@
         android:id="@+id/textView3"
         android:layout_width="272dp"
         android:layout_height="45dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginBottom="70dp"
         android:text="@string/saved_searches"
         android:textAlignment="center"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.923" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
