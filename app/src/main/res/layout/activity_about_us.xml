@@ -95,7 +95,7 @@
         android:layout_width="272dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:text="@string/information"
+        android:text="@string/about_us"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
