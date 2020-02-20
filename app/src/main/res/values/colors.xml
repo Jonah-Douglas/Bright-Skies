@@ -3,4 +3,18 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!-- inactive dots color -->
+    <color name="dot_dark">#2278d4</color>
+
+    <!-- active dot color -->
+    <color name="dot_light">#93c6fd</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark</item>
+    </array>
 </resources>
