@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
+            dots[0].setTextColor(colorsActive[0]);
     }
 
 
@@ -132,16 +133,16 @@ public class WelcomeActivity extends AppCompatActivity {
          * View pager adapter
          */
         public class MyViewPagerAdapter extends PagerAdapter {
+        private LayoutInflater layoutInflater;
 
             MyViewPagerAdapter() {
             }
 
-            @NonNull
             @Override
-            public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            public Object instantiateItem(ViewGroup container, int position) {
+                layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-                assert layoutInflater != null;
+//                assert layoutInflater != null;
                 View view = layoutInflater.inflate(layouts[position], container, false);
                 container.addView(view);
 

@@ -11,28 +11,27 @@
         android:layout_width="420dp"
         android:layout_height="742dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/welcome_image_3"
-        tools:layout_editor_absoluteX="-5dp"
-        tools:layout_editor_absoluteY="-16dp" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/welcome_image_3" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="325dp"
         android:layout_height="69dp"
-        android:layout_marginTop="556dp"
         android:fontFamily="casual"
         android:text="@string/slide_3_desc"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#00BCD4"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/textView"
