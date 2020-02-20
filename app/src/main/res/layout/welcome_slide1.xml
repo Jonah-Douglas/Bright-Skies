@@ -15,14 +15,6 @@
         tools:layout_editor_absoluteX="-5dp"
         tools:layout_editor_absoluteY="-16dp" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="420dp"
-        android:layout_height="742dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/welcome_image_1"
-        tools:layout_editor_absoluteX="-5dp"
-        tools:layout_editor_absoluteY="-6dp" />
 
     <TextView
         android:id="@+id/textView4"

@@ -35,7 +35,7 @@
         android:background="#FF5722"
         android:fontFamily="casual"
         android:onClick="enterApp"
-        android:text="@string/discover_your_bright_skies"
+        android:text="@string/discover"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
