@@ -21,4 +21,8 @@
     <string name="about_us_page3">This app aims to inform users about solar energy and their solar potential,
         and ultimately encourages more people to switch to this renewable energy source.</string>
     <string name="about_us_page4">Please contact brightskies@gmail.com if you encounter any issues with this app.</string>
+    <string name="first_welcome_page">First Welcome Page</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
