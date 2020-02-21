@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bright-skies</string>
+    <string name="app_name">Bright Skies</string>
     <string name="discover_your_bright_skies">Discover Your Bright Skies</string>
     <string name="bright_skies">Bright Skies</string>
     <string name="image_description">Image</string>
@@ -21,4 +21,12 @@
     <string name="about_us_page3">This app aims to inform users about solar energy and their solar potential,
         and ultimately encourages more people to switch to this renewable energy source.</string>
     <string name="about_us_page4">Please contact brightskies@gmail.com if you encounter any issues with this app.</string>
+    <string name="menu_about_us">About Us</string>
+    <string name="menu_calculator">Energy Calculator</string>
+    <string name="menu_faq">FAQ</string>
+    <string name="menu_information">Information</string>
+    <string name="menu_results">Results</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_saved_searches">Saved Searches</string>
+    <string name="menu_category_info">App Information</string>
 </resources>
