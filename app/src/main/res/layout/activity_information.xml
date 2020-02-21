@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="232dp"
-        android:layout_height="91dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:fontFamily="casual"
         android:text="@string/bright_skies"
@@ -20,22 +21,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="277dp"
-        android:layout_height="327dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginBottom="157dp"
-        android:fontFamily="cursive"
-        android:text="@string/temporary_text"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button9"
@@ -54,14 +39,57 @@
         android:layout_width="272dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="75dp"
         android:text="@string/information"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Test Exapandable"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:onClick="showmyinformation"
+        android:id="@+id/Expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="260dp"
+        android:text="Expand"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expandview"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ael_expanded = "false"
+        app:ael_duration = "800"
+        app:ael_interpolator = "accelerate"
+        app:ael_orientation = "vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" >
+
+        <TextView
+            android:lineSpacingExtra="2dp"
+            android:textColor="#3d3d3d"
+            android:textSize="18sp"
+            android:text="Epanded Button is working correctly, now this text is visible on click and disappears on click."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
