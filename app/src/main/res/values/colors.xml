@@ -17,4 +17,5 @@
     <array name="array_dot_inactive">
         <item>@color/dot_dark</item>
     </array>
+    <color name="main_blue">#00BCD4</color>
 </resources>

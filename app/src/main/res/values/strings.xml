@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">bright-skies</string>
+    <string name="app_name">Bright Skies</string>
+    <string name="discover_your_bright_skies">Discover Your Bright Skies</string>
     <string name="bright_skies">Bright Skies</string>
     <string name="image_description">Image</string>
     <string name="title_activity_map_page">Map</string>
@@ -31,4 +32,12 @@
     <string name="skip">Skip</string>
     <string name="discover">Discover Your Bright Skies</string>
 
+    <string name="menu_about_us">About Us</string>
+    <string name="menu_calculator">Energy Calculator</string>
+    <string name="menu_faq">FAQ</string>
+    <string name="menu_information">Information</string>
+    <string name="menu_results">Results</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_saved_searches">Saved Searches</string>
+    <string name="menu_category_info">App Information</string>
 </resources>

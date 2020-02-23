@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../brightskies.iml" filepath="$PROJECT_DIR$/../brightskies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../bright-skies.iml" filepath="$PROJECT_DIR$/../bright-skies.iml" />
     </modules>
   </component>
 </project>

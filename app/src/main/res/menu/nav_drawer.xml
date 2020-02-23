@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_map_icon"
+            android:title="@string/menu_map" />
+        <item
+            android:id="@+id/nav_saved_searches"
+            android:icon="@drawable/ic_favorite_icon"
+            android:title="@string/menu_saved_searches" />
+        <item
+            android:id="@+id/nav_calculator"
+            android:icon="@drawable/ic_calculator_icon"
+            android:title="@string/menu_calculator" />
+        <item
+            android:id="@+id/nav_information"
+            android:icon="@drawable/ic_information_icon"
+            android:title="@string/menu_information" />
+    </group>
+
+    <item android:title="@string/menu_category_info">
+        <menu>
+            <item
+                android:id="@+id/nav_faq"
+                android:icon="@drawable/ic_faq_icon"
+                android:title="@string/menu_faq" />
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_about_us_icon"
+                android:title="@string/menu_about_us" />
+        </menu>
+    </item>
+
+</menu>

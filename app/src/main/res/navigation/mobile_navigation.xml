@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_about_us">
+
+    <fragment
+        android:id="@+id/nav_about_us"
+        android:name="com.example.bright_skies.ui.about.AboutUsFragment"
+        android:label="@string/menu_about_us"
+        tools:layout="@layout/fragment_about_us" />
+
+    <fragment
+        android:id="@+id/nav_calculator"
+        android:name="com.example.bright_skies.ui.calculator.CalculatorFragment"
+        android:label="@string/menu_calculator"
+        tools:layout="@layout/fragment_calculator" />
+
+    <fragment
+        android:id="@+id/nav_faq"
+        android:name="com.example.bright_skies.ui.faq.FaqFragment"
+        android:label="@string/menu_faq"
+        tools:layout="@layout/fragment_faq" />
+
+    <fragment
+        android:id="@+id/nav_information"
+        android:name="com.example.bright_skies.ui.information.InformationFragment"
+        android:label="@string/menu_information"
+        tools:layout="@layout/fragment_information" />
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.example.bright_skies.ui.map.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/nav_results"
+        android:name="com.example.bright_skies.ui.results.ResultsFragment"
+        android:label="@string/menu_results"
+        tools:layout="@layout/fragment_results" />
+
+    <fragment
+        android:id="@+id/nav_saved_searches"
+        android:name="com.example.bright_skies.ui.savedsearches.SavedSearchesFragment"
+        android:label="@string/menu_saved_searches"
+        tools:layout="@layout/fragment_saved_searches" />
+</navigation>
