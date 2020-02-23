@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private LinearLayout dotsLayout;
     private int[] layouts;
-    private Button btnSkip, btnNext;
+    private Button btnSkip, btnNext, btnDiscover;
     private PrefManager prefManager;
 
     @Override
@@ -90,12 +90,6 @@ public class WelcomeActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    private void launchHomeScreen() {
-//        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-        finish();
-    }
-
 
     //  viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -107,7 +101,8 @@ public class WelcomeActivity extends AppCompatActivity {
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
-                btnNext.setText(getString(R.string.discover));
+//                btnNext.setText(getString(R.string.got_it));
+                btnNext.setVisibility(View.GONE);
                 btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left
@@ -128,8 +123,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
     };
 
+    public void LaunchHomeScreen(View view) {
+        //        prefManager.setFirstTimeLaunch(false);
+        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        finish();
+    }
 
-        /**
+
+    /**
          * View pager adapter
          */
         public class MyViewPagerAdapter extends PagerAdapter {
