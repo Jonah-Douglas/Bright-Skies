@@ -82,7 +82,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         if (dots.length > 0)
-            dots[0].setTextColor(colorsActive[0]);
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
 
