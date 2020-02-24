@@ -1,10 +1,12 @@
-package com.example.bright_skies;
+package com.example.bright_skies.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.bright_skies.R;
 
 public class AboutUsActivity extends AppCompatActivity {
 

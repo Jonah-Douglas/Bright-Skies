@@ -1,4 +1,4 @@
-package com.example.bright_skies;
+package com.example.bright_skies.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.bright_skies.R;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
