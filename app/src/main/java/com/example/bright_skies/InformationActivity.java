@@ -12,14 +12,14 @@ import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 public class InformationActivity extends AppCompatActivity {
 
     Button Expand;
-    ExpandableRelativeLayout expandview;
+    ExpandableRelativeLayout expandView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-        Expand = (Button) findViewById(R.id.Expand);
+        Expand = findViewById(R.id.Expand);
     }
 
     /** Called when the user taps the Discover Your Bright Skies button */
@@ -28,8 +28,8 @@ public class InformationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showmyinformation (View view) {
-        expandview = (ExpandableRelativeLayout) findViewById(R.id.expandview);
-        expandview.toggle();
+    public void showMyInformation(View view) {
+        expandView = findViewById(R.id.expandview);
+        expandView.toggle();
     }
 }
