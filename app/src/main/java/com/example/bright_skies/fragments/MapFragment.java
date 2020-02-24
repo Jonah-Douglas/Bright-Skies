@@ -1,4 +1,4 @@
-package com.example.bright_skies.ui.faq;
+package com.example.bright_skies.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bright_skies.R;
 
-public class FaqFragment extends Fragment {
+public class MapFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_faq, container, false);
+        View root = inflater.inflate(R.layout.fragment_map, container, false);
 
         return root;
     }

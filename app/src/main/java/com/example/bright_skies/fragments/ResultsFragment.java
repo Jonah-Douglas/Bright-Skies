@@ -1,4 +1,4 @@
-package com.example.bright_skies.ui.results;
+package com.example.bright_skies.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

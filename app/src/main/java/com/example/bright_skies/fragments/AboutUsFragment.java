@@ -1,4 +1,4 @@
-package com.example.bright_skies.ui.savedsearches;
+package com.example.bright_skies.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bright_skies.R;
 
-public class SavedSearchesFragment extends Fragment {
+public class AboutUsFragment extends Fragment {
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_saved_searches, container, false);
+        View root = inflater.inflate(R.layout.fragment_about_us, container, false);
 
         return root;
     }

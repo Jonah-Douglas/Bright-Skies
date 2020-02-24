@@ -1,4 +1,4 @@
-package com.example.bright_skies.ui.about;
+package com.example.bright_skies.fragments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
