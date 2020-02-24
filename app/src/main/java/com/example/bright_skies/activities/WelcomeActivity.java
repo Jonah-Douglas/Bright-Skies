@@ -1,10 +1,9 @@
-package com.example.bright_skies;
+package com.example.bright_skies.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.example.bright_skies.R;
+import com.example.bright_skies.managers.PrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
 

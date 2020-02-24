@@ -1,4 +1,4 @@
-package com.example.bright_skies;
+package com.example.bright_skies.managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
