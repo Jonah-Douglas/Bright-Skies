@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.bright_skies.BaseDrawerActivity;
 import com.example.bright_skies.R;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
-public class InformationActivity extends AppCompatActivity {
+public class InformationActivity extends BaseDrawerActivity {
 
     Button Expand;
     ExpandableRelativeLayout expandView;
@@ -18,9 +19,11 @@ public class InformationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
+        getLayoutInflater().inflate(R.layout.activity_information, frameLayout);
 
         Expand = findViewById(R.id.Expand);
+
+        setTitle("Information");
     }
 
     /** Called when the user taps the Discover Your Bright Skies button */

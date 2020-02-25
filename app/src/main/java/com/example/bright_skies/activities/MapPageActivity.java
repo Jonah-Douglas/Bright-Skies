@@ -6,14 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.bright_skies.BaseDrawerActivity;
 import com.example.bright_skies.R;
 
-public class MapPageActivity extends AppCompatActivity {
+public class MapPageActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_page);
+        getLayoutInflater().inflate(R.layout.activity_map_page, frameLayout);
+
+        setTitle("Map");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        // to check current activity in navigation drawer
+        navView.getMenu().findItem(R.id.nav_map).setChecked(true);
     }
 
     /** Called when the user taps the Discover Your Bright Skies button */

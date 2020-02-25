@@ -1,16 +1,12 @@
 package com.example.bright_skies.fragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.bright_skies.CustomExpandableListAdapter;
 import com.example.bright_skies.ExpandableListDataPump;
@@ -20,25 +16,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class InformationFragment extends Fragment {
-
+public class InformationFragmentActivity extends FragmentActivity {
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.information_expandable, container, false);
-        expandableListView = getView().findViewById(R.id.expandableListView);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.information_expandable);
+        expandableListView = findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPump.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-        expandableListAdapter = new CustomExpandableListAdapter(this.getActivity(), expandableListTitle, expandableListDetail);
+        expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(),
+                Toast.makeText(getApplicationContext(),
                         expandableListTitle.get(groupPosition) + " List Expanded.",
                         Toast.LENGTH_SHORT).show();
             }
@@ -48,7 +45,7 @@ public class InformationFragment extends Fragment {
 
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(),
+                Toast.makeText(getApplicationContext(),
                         expandableListTitle.get(groupPosition) + " List Collapsed.",
                         Toast.LENGTH_SHORT).show();
 
@@ -60,7 +57,7 @@ public class InformationFragment extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 Toast.makeText(
-                        getActivity().getApplicationContext(),
+                        getApplicationContext(),
                         expandableListTitle.get(groupPosition)
                                 + " -> "
                                 + expandableListDetail.get(
@@ -71,10 +68,5 @@ public class InformationFragment extends Fragment {
             }
         });
 
-        return root;
-    }
-
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 }

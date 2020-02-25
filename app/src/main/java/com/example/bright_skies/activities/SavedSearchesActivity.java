@@ -6,14 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.bright_skies.BaseDrawerActivity;
 import com.example.bright_skies.R;
 
-public class SavedSearchesActivity extends AppCompatActivity {
+public class SavedSearchesActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_searches);
+        getLayoutInflater().inflate(R.layout.activity_saved_searches, frameLayout);
+
+        setTitle("Saved Searches");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        // to check current activity in navigation drawer
+        navView.getMenu().findItem(R.id.nav_saved_searches).setChecked(true);
     }
 
     /** Called when the user taps the Discover Your Bright Skies button */

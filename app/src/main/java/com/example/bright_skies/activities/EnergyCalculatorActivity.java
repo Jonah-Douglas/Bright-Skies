@@ -6,14 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.bright_skies.BaseDrawerActivity;
 import com.example.bright_skies.R;
 
-public class EnergyCalculatorActivity extends AppCompatActivity {
+public class EnergyCalculatorActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_energy_calculator);
+        getLayoutInflater().inflate(R.layout.activity_energy_calculator, frameLayout);
+
+        setTitle("Energy Calculator");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        // to check current activity in navigation drawer
+        navView.getMenu().findItem(R.id.nav_calculator).setChecked(true);
     }
 
     /** Called when the user taps the Discover Your Bright Skies button */
