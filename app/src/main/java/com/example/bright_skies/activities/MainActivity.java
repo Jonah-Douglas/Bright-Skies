@@ -12,6 +12,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.bright_skies.R;
+import com.example.bright_skies.fragments.AboutUsFragment;
+import com.example.bright_skies.fragments.MapFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.content_frame, new MapFragment());
+//
+//
+//        Fragment current = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
+//        if (current instanceof AboutUsFragment) {
+//            fragmentTransaction.hide(current);
+//        }
+//
+//        fragmentTransaction.commit();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -44,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+//        MapFragment mapFragment = new MapFragment();
+//        swapFragment(mapFragment);
     }
 
     @Override

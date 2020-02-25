@@ -7,7 +7,7 @@
     tools:context=".activities.EnergyCalculatorActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/about_intro"
         android:layout_width="277dp"
         android:layout_height="327dp"
         android:layout_marginTop="115dp"
