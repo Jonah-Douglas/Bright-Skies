@@ -65,7 +65,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inf.inflate(R.layout.information_list_item, parent, false);
             holder = new ViewHolder();
 
-            holder.text = convertView.findViewById(R.id.lblListItem);
+            holder.text = convertView.findViewById(R.id.list_item);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -84,7 +84,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inf.inflate(R.layout.information_list_group, parent, false);
 
             holder = new ViewHolder();
-            holder.text = convertView.findViewById(R.id.lblListHeader);
+            holder.text = convertView.findViewById(R.id.ex_list_header);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

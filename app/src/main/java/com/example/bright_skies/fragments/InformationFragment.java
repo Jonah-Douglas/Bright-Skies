@@ -12,11 +12,9 @@ import com.example.bright_skies.managers.ExpandableListAdapter;
 
 public class InformationFragment extends Fragment {
 
-    View rootView;
-    ExpandableListView lv;
     private String[] groups;
     private String[][] children;
-    
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -32,7 +30,7 @@ public class InformationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.information_expandable, container, false);
+        View rootView = inflater.inflate(R.layout.information_expandable, container, false);
 
         return rootView;
     }
@@ -41,9 +39,9 @@ public class InformationFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        lv = view.findViewById(R.id.expandableListView);
-        lv.setAdapter(new ExpandableListAdapter(this, groups, children));
-        lv.setGroupIndicator(null);
+        ExpandableListView expandableListView = view.findViewById(R.id.expandableListView);
+        expandableListView.setAdapter(new ExpandableListAdapter(this, groups, children));
+        expandableListView.setGroupIndicator(null);
 
     }
 
