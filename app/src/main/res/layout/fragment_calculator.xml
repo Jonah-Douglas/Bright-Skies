@@ -30,7 +30,17 @@
             android:text="kWh"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:layout_marginLeft="5dp"
+            />
+
     </LinearLayout>
+
+
 
     <TableLayout
         android:id="@+id/energy_table"
