@@ -11,22 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LocationResultsActivity"></activity>
-        <activity android:name="WelcomeActivity">
+        <activity android:name=".activities.LocationResultsActivity"></activity>
+        <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutUsActivity" />
-        <activity android:name=".FAQsActivity" />
-        <activity android:name=".InformationActivity" />
-        <activity android:name=".EnergyCalculatorActivity" />
-        <activity android:name=".SavedSearchesActivity" />
-        <activity android:name=".NavigationPageActivity" />
-        <activity android:name=".MapPageActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.AboutUsActivity" />
+        <activity android:name=".activities.FAQsActivity" />
+        <activity android:name=".activities.InformationActivity" />
+        <activity android:name=".activities.EnergyCalculatorActivity" />
+        <activity android:name=".activities.SavedSearchesActivity" />
+        <activity android:name=".activities.NavigationPageActivity" />
+        <activity android:name=".activities.MapPageActivity" />
+        <activity android:name=".activities.MainActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
