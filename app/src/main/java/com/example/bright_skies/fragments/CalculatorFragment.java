@@ -20,9 +20,10 @@ public class CalculatorFragment extends Fragment {
     private double fridge;
     private double microwave;
     private double miles;
+    private double bulb;
     private double coal;
     private double gas;
-    private double bulb;
+    private double ledbulb;
     private double kwh;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,12 +56,18 @@ public class CalculatorFragment extends Fragment {
         updateCoal(v);
         updateGas(v);
         updateLightbulb(v);
+        updateLEDbulb(v);
 
     }
 
     private void updateLightbulb(View v) {
         TextView lightbulbView = v.findViewById(R.id.bulb_number);
         lightbulbView.setText(Double.toString(calculateLightBulb()));
+    }
+
+    private void updateLEDbulb(View v) {
+        TextView lightbulbView = v.findViewById(R.id.bulb_number);
+        lightbulbView.setText(Double.toString(calculateLEDBulb()));
     }
 
     private void updateGas(View v) {
@@ -89,26 +96,44 @@ public class CalculatorFragment extends Fragment {
     }
 
     private double calculateFridgeHours() {
-        return kwh;
+        fridge = kwh * .5;
+        fridge = Math.round(fridge * 100.0) / 100.0;
+        return fridge;
     }
 
     private double calculateMicrowaveHours() {
-        return kwh;
+        microwave = kwh * .83;
+        microwave = Math.round(microwave * 100.0) / 100.0;
+        return microwave;
     }
 
     private double calculateMiles() {
-        return kwh;
+        miles = kwh * 1.39;
+        miles = Math.round(miles * 100.0) / 100.0;
+        return miles;
     }
 
     private double calculateCoal() {
-        return kwh;
-    }
-
-    private double calculateGas() {
-        return kwh;
+        coal = kwh;
+        coal = Math.round(coal * 100.0) / 100.0;
+        return coal;
     }
 
     private double calculateLightBulb() {
-        return kwh;
+        bulb = kwh * 16.67;
+        bulb = Math.round(bulb * 100.0) / 100.0;
+        return bulb;
+    }
+
+    private double calculateGas() {
+        gas = kwh * 3.412;
+        gas = Math.round(gas * 100.0) / 100.0;
+        return gas;
+    }
+
+    private double calculateLEDBulb() {
+        ledbulb = kwh * 200;
+        ledbulb = Math.round(ledbulb * 100.0) / 100.0;
+        return ledbulb;
     }
 }
