@@ -23,14 +23,20 @@
     <string name="about_us_page4">Please contact brightskies@gmail.com if you encounter any issues with this app.</string>
     <string name="first_welcome_page">First Welcome Page</string>
 
+    <string name="input_label">Input Label</string>
+    <string name="empty"> </string>
+    <string name="sub">Sub</string>
+
     <!-- welcome screen(s) strings -->
     <string name="slide_1_desc">Protecting the Earth</string>
     <string name="slide_2_desc">Money in your Pocket</string>
     <string name="slide_3_desc">Why go Solar?</string>
+    <string name="slide_3_desc_2">Discover Your Bright Skies</string>
+
 
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-    <string name="discover">Discover Your Bright Skies</string>
+<!--    <string name="got_it">Discover!</string>-->
 
     <string name="menu_about_us">About Us</string>
     <string name="menu_calculator">Energy Calculator</string>

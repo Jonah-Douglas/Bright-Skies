@@ -1,25 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EnergyCalculatorActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="277dp"
-        android:layout_height="327dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginBottom="157dp"
-        android:fontFamily="cursive"
-        android:text="@string/temporary_text"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
-        android:textSize="24sp"
+
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/energy_table"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/energy_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/energy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="kWh"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:layout_marginLeft="5dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <TableLayout
+        android:id="@+id/energy_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
+        <TableRow
+            android:id="@+id/fridge_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
 
+            <ImageView
+                android:id="@+id/fridge_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_fridge_icon"
+                />
+
+            <TextView
+                android:id="@+id/fridge_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/fridge_desc"
+                android:text="hours running your fridge"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/microwave_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/microwave_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_microwave_icon" />
+
+            <TextView
+                android:id="@+id/microwave_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/microwave_desc"
+                android:text="hours running your microwave"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/walk_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/walk_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_walk_icon"
+                />
+
+            <TextView
+                android:id="@+id/walk_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/walk_desc"
+                android:text="miles walking"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/coal_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/coal_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_coal_icon"
+                />
+
+            <TextView
+                android:id="@+id/coal_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/coal_desc"
+                android:text="pounds of coal"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/gas_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/gas_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_gas_icon"
+                />
+
+            <TextView
+                android:id="@+id/gas_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/gas_desc"
+                android:text="cubic feet of natural gas"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/bulb_row"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/bulb_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_bulb_icon"
+                />
+
+            <TextView
+                android:id="@+id/bulb_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/bulb_desc"
+                android:text="hours on incandescent bulb"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
