@@ -25,7 +25,6 @@
         tools:layout="@layout/fragment_faq" />
 
     <fragment
-        class="com.google.android.gms.maps.MapFragment"
         android:id="@+id/nav_information"
         android:name="com.example.bright_skies.fragments.InformationFragment"
         android:label="@string/menu_information"
