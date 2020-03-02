@@ -12,6 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+<!--    <fragment-->
+<!--        android:id="@+id/nav_map"-->
+<!--        android:name="com.example.bright_skies.fragments.MapFragment"-->
+<!--        android:label="@string/menu_map"-->
+<!--        tools:layout="@layout/fragment_map"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        class="com.google.android.gms.maps.SupportMapFragment"/>-->
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

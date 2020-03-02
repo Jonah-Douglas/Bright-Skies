@@ -28,7 +28,7 @@
         android:id="@+id/nav_information"
         android:name="com.example.bright_skies.fragments.InformationFragment"
         android:label="@string/menu_information"
-        tools:layout="@layout/information_expandable" />
+        tools:layout="@layout/information_expandable"/>
 
     <fragment
         android:id="@+id/nav_map"
