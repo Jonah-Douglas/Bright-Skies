@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_map_icon"
             android:title="@string/menu_map" />
         <item
-            android:id="@+id/nav_saved_searches"
-            android:icon="@drawable/ic_favorite_icon"
-            android:title="@string/menu_saved_searches" />
-        <item
             android:id="@+id/nav_calculator"
             android:icon="@drawable/ic_calculator_icon"
             android:title="@string/menu_calculator" />
