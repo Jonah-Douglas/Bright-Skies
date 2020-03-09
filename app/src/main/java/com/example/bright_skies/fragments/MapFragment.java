@@ -4,10 +4,14 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -37,6 +41,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private MapView mMapView;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private EditText textInput;
+    private Button searchEnter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
@@ -47,11 +53,35 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //            != PackageManager.PERMISSION_GRANTED) {
 //            ActivityCompat.requestPermissions(MainActivity, Manifest.permission.ACCESS_FINE_LOCATIONS);
 //        }
+        searchEnter = (Button) root.findViewById(R.id.search_button);
+        searchEnter.setEnabled(false);
+        textInput = (EditText) root.findViewById(R.id.location_input);
+        textInput.setHint("Enter location");
+        textInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                enableSearch();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mMapView = (MapView) root.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
         return root;
+    }
+
+    public void enableSearch() {
+        boolean textPresent = (textInput.getText().toString().length() > 0);
+        searchEnter.setEnabled(textPresent);
     }
 
     @Override
