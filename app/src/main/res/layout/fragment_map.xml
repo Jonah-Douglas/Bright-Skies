@@ -29,22 +29,37 @@
         map:liteMode="true"
         map:mapType="normal" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="314dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/enter_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mapView" />
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="314dp"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginTop="36dp"-->
+<!--        android:text="@string/enter_location"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/mapView" />-->
 
     <EditText
         android:id="@+id/location_input"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="298dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         android:importantForAutofill="no"
-        android:inputType="textPostalAddress" />
+        android:inputType="textPostalAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="78dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="52dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toEndOf="@+id/location_input"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
