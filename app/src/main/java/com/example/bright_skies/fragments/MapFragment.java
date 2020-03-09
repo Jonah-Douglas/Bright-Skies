@@ -64,7 +64,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                enableSearch();
+                enableSearch(s);
             }
 
             @Override
@@ -79,8 +79,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
-    public void enableSearch() {
-        boolean textPresent = (textInput.getText().toString().length() > 0);
+    public void enableSearch(CharSequence s) {
+        boolean textPresent = (s.length() > 0);
         searchEnter.setEnabled(textPresent);
     }
 
