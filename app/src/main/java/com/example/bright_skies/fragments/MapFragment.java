@@ -19,6 +19,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Cache;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.bright_skies.R;
 import com.example.bright_skies.activities.MainActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,6 +40,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -53,6 +63,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
     private Button searchEnter;
+    private RequestQueue requestQueue;
     private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
     private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
 
@@ -69,6 +80,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //            ActivityCompat.requestPermissions(MainActivity, Manifest.permission.ACCESS_FINE_LOCATIONS);
 //        }
 
+        requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()).getApplicationContext());
         /**
          * Search Button and Text Input
          */
@@ -97,22 +109,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 String input = textInput.getText().toString();
                 input = input.replaceAll("\\s","+");
                 new GetJSONTask().execute(input);
-//                Log.d("TEST", "searchLocation input: " + input);
-//                String request_url = GEOCODE_URL + "json?address=" + input + "&key=" + getResources().getString(R.string.google_api_key);
-//                Log.d("TEST", request_url);
-//                // Geocoder connection
-//                try {
-//                    URL obj = new URL(request_url);
-//                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//                    con.setRequestMethod("GET");
-//                    int responseCode = con.getResponseCode();
-//                    Log.d("TEST", "Response code: " + responseCode);
-//                    if(responseCode == HttpURLConnection.HTTP_OK) {
-//                        Log.d("TEST", "http ok...");
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
             }
         });
 
@@ -202,27 +198,41 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             Log.d("TEST", "searchLocation input: " + input);
             String request_url = GEOCODE_URL + "json?address=" + input + "&key=" + getResources().getString(R.string.google_api_key);
             Log.d("TEST", request_url);
-            // Geocoder connection
-            try {
-                URL obj = new URL(request_url);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                con.setRequestMethod("GET");
-                int responseCode = con.getResponseCode();
-                Log.d("TEST", "Response code: " + responseCode);
-                if(responseCode == HttpURLConnection.HTTP_OK) {
-                    Log.d("TEST", "http ok...");
-                    InputStream in = new BufferedInputStream(con.getInputStream());
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuffer buffer = new StringBuffer();
-                    String line = "";
-                    while ((line = reader.readLine()) != null) {
-                        buffer.append(line + "\n");
-                        Log.d("TEST", "> " + line);
-                    }
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(request_url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("TEST", "Response: " + response.toString());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("TEST", "JSON Error: " + error.toString());
+                }
+            });
+            requestQueue.add(jsonRequest);
+            // Geocoder connection
+//            try {
+//
+//                URL obj = new URL(request_url);
+//                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//                con.setRequestMethod("GET");
+//                int responseCode = con.getResponseCode();
+//                Log.d("TEST", "Response code: " + responseCode);
+//                if(responseCode == HttpURLConnection.HTTP_OK) {
+//                    Log.d("TEST", "http ok...");
+//                    InputStream in = new BufferedInputStream(con.getInputStream());
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//                    StringBuffer buffer = new StringBuffer();
+//                    String line = "";
+//                    while ((line = reader.readLine()) != null) {
+//                        buffer.append(line + "\n");
+//                        Log.d("TEST", "> " + line);
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             return null;
         }
     }
