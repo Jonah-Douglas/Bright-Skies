@@ -1,4 +1,9 @@
 <resources>
+    <!-- API Keys -->
+    <string name="google_api_key">AIzaSyDwfV16haFpHVM5CzoVcUCXRsLzDlEuR0c</string>
+
+
+
     <string name="app_name">Bright Skies</string>
     <string name="discover_your_bright_skies">Discover Your Bright Skies</string>
     <string name="bright_skies">Bright Skies</string>
@@ -13,6 +18,8 @@
     <string name="about_us">About Us</string>
     <string name="location_results">Location Results</string>
     <string name="temporary_text">Temporary Text</string>
+
+    <!-- About Us strings-->
     <string name="about_us_page1">Comprised of Zack Doll, Jonah Douglas, Melody Grappo, and Piper Wolters,
         our team was formed in Winter 2020 at Western Washington University.</string>
     <string name="about_us_page2">We are passionate individuals about computer science and the planet. We hope to use
