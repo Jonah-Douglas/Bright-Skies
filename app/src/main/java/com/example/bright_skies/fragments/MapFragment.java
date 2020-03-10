@@ -41,6 +41,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -201,7 +203,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             JsonObjectRequest jsonRequest = new JsonObjectRequest(request_url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Log.d("TEST", "Response: " + response.toString());
+                    try {
+                        Log.d("TEST", "Response: " + response.toString(2));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        JSONObject results = (JSONObject) response.getJSONArray("results").get(0);
+//                        Log.d("TEST", "results: " + results.toString(2));
+                        JSONObject geometry = results.getJSONObject("geometry");
+//                        Log.d("TEST", "geometry object:" + geometry.toString());
+                        JSONObject location = geometry.getJSONObject("location");
+                        Log.d("TEST", "Location: " + location.toString(2));
+                    } catch (JSONException e) {
+                        Log.d("TEST", "failed to get geometry");
+                        e.printStackTrace();
+                    }
                 }
             }, new Response.ErrorListener() {
 
