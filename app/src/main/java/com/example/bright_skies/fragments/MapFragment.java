@@ -85,7 +85,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         dummyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                new GetSolarInfoTask().execute();  //pass in lat & long
+                String[] input = {"40", "130"};  //TODO: get actual lat & long
+                new GetSolarInfoTask().execute(input);
             }
         });
 
