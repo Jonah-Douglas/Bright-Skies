@@ -3,6 +3,7 @@ package com.example.bright_skies.fragments;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,14 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Cache;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.bright_skies.R;
 import com.example.bright_skies.activities.MainActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,6 +39,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.Buffer;
 import java.util.Objects;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
@@ -43,16 +65,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Button searchEnter;
     private Button dummyButton;
     private EditText dummyText;
+    private RequestQueue requestQueue;
+    private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
+    private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
+    private final String NREL_URL = "https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /**
+         * Inflate View
+         */
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-//        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.mapView);
-//        mapFragment.getMapAsync(this);
+
         Bundle mapViewBundle = null;
-//        if (ContextCompat.checkSelfPermission(MainActivity, Manifest.permission.ACCESS_FINE_LOCATION)
-//            != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(MainActivity, Manifest.permission.ACCESS_FINE_LOCATIONS);
-//        }
+
         searchEnter = (Button) root.findViewById(R.id.search_button);
         searchEnter.setEnabled(false);
 
@@ -60,25 +85,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         dummyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream())) {
-                    String formated_s = s.useDelimiter("\\A").next();
-
-                    String delims = "[,]+";
-                    String[] tokens = formated_s.split(delims);
-
-                    String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]", "");
-                    String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]", "");
-                    String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]", "");
-
-                    Log.d("TEST2", avg_dni);
-                }
-                catch (Exception e) {
-                    Log.d("TEST2", "failed");
-                    return;
-                }
+                new GetSolarInfoTask().execute();  //pass in lat & long
             }
         });
 
+
+        requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()).getApplicationContext());
+        /**
+         * Search Button and Text Input
+         */
         textInput = (EditText) root.findViewById(R.id.location_input);
         textInput.setHint("Enter location");
         textInput.addTextChangedListener(new TextWatcher() {
@@ -96,34 +111,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+        searchEnter = (Button) root.findViewById(R.id.search_button);
+        searchEnter.setEnabled(false);
+        searchEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = textInput.getText().toString();
+                input = input.replaceAll("\\s","+");
+                new GetJSONTask().execute(input);
+            }
+        });
 
+        /**
+         * Map View
+         */
         mMapView = (MapView) root.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
         return root;
-    }
-
-
-    // future parameters: int latitude, int longitude
-    public void getSolarInfo(View view) {
-        try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream())) {
-            String formated_s = s.useDelimiter("\\A").next();
-
-            String delims = "[,]+";
-            String[] tokens = formated_s.split(delims);
-
-            String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]", "");
-            String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]", "");
-            String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]", "");
-
-
-            System.out.println("avg_dni:" + avg_dni + ", avg_ghi: " + avg_ghi + ", lat_tilt: " + lat_tilt);
-
-            Log.d("TEST", avg_dni);
-        }
-        catch (Exception e) {
-            return;
-        }
     }
 
     public void enableSearch(CharSequence s) {
@@ -156,8 +161,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     double lat = location.getLatitude();
                     double lon = location.getLongitude();
                     LatLng userLatLng = new LatLng(lat, lon);
-                    Log.d("TEST", String.valueOf(lat));
-                    Log.d("TEST", String.valueOf(lon));
+                    Log.d("TEST", "last known lat: " + String.valueOf(lat));
+                    Log.d("TEST", "last known lng: " + String.valueOf(lon));
                     CameraPosition cam_pos = new CameraPosition.Builder()
                             .target(userLatLng)
                             .zoom(18)
@@ -182,12 +187,90 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onResume() {
-        Log.d("TEST", "entered onResume");
         super.onResume();
         mMapView.onResume();
-        Log.d("TEST", "leaving onResume");
     }
 
 
+    private class GetJSONTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String input = strings[0];
+            Log.d("TEST", "searchLocation input: " + input);
+            String request_url = GEOCODE_URL + "json?address=" + input + "&key=" + getResources().getString(R.string.google_api_key);
+            Log.d("TEST", request_url);
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(request_url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("TEST", "Response: " + response.toString(2));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        JSONObject results = (JSONObject) response.getJSONArray("results").get(0);
+//                        Log.d("TEST", "results: " + results.toString(2));
+                        JSONObject geometry = results.getJSONObject("geometry");
+//                        Log.d("TEST", "geometry object:" + geometry.toString());
+                        JSONObject location = geometry.getJSONObject("location");
+                        Log.d("TEST", "Location: " + location.toString(2));
+                    } catch (JSONException e) {
+                        Log.d("TEST", "failed to get geometry");
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("TEST", "JSON Error: " + error.toString());
+                }
+            });
+            requestQueue.add(jsonRequest);
+            return null;
+        }
+    }
+
+    private class GetSolarInfoTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String latitude = strings[0];
+            String longitude = strings[1];
+            String request_url = NREL_URL + "&lat=" + latitude + "&lon=" + longitude;
+
+            Log.d("TEST2", request_url);
+            
+            java.io.InputStream ss = null;
+            java.util.Scanner s = null;
+
+            try {
+                ss = new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                s = new java.util.Scanner(ss);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String formatted_s = s.useDelimiter("\\A").next();
+            String delims = "[,]+";
+            String[] tokens = formatted_s.split(delims);
+
+            String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]","");
+            String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]","");
+            String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]","");
+
+            Log.d("TEST2", "avg_dni:" + avg_dni);
+            Log.d("TEST2", "avg_ghi:" + avg_ghi);
+            Log.d("TEST2", "lat_tilt:" + lat_tilt);
+
+            return null;
+        }
+    }
 
 }
