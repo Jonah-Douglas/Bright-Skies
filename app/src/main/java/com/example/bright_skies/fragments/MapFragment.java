@@ -128,11 +128,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         searchEnter.setEnabled(textPresent);
     }
 
-    public void searchLocation() {
-        String input = textInput.getText().toString();
-        input = input.replaceAll("\\s","+");
-        Log.d("TEST", "searchLocation input: " + input);
-    }
+//    public void searchLocation() {
+//        String input = textInput.getText().toString();
+//        input = input.replaceAll("\\s","+");
+//        Log.d("TEST", "searchLocation input: " + input);
+//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -159,8 +159,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     double lat = location.getLatitude();
                     double lon = location.getLongitude();
                     LatLng userLatLng = new LatLng(lat, lon);
-                    Log.d("TEST", String.valueOf(lat));
-                    Log.d("TEST", String.valueOf(lon));
+                    Log.d("TEST", "last known lat: " + String.valueOf(lat));
+                    Log.d("TEST", "last known lng: " + String.valueOf(lon));
                     CameraPosition cam_pos = new CameraPosition.Builder()
                             .target(userLatLng)
                             .zoom(18)
@@ -185,10 +185,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onResume() {
-        Log.d("TEST", "entered onResume");
         super.onResume();
         mMapView.onResume();
-        Log.d("TEST", "leaving onResume");
     }
 
 
@@ -228,28 +226,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }
             });
             requestQueue.add(jsonRequest);
-            // Geocoder connection
-//            try {
-//
-//                URL obj = new URL(request_url);
-//                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//                con.setRequestMethod("GET");
-//                int responseCode = con.getResponseCode();
-//                Log.d("TEST", "Response code: " + responseCode);
-//                if(responseCode == HttpURLConnection.HTTP_OK) {
-//                    Log.d("TEST", "http ok...");
-//                    InputStream in = new BufferedInputStream(con.getInputStream());
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//                    StringBuffer buffer = new StringBuffer();
-//                    String line = "";
-//                    while ((line = reader.readLine()) != null) {
-//                        buffer.append(line + "\n");
-//                        Log.d("TEST", "> " + line);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
             return null;
         }
     }
