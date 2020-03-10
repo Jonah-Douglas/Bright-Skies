@@ -3,6 +3,7 @@ package com.example.bright_skies.fragments;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +33,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
@@ -86,7 +91,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
                 String input = textInput.getText().toString();
                 input = input.replaceAll("\\s","+");
-                Log.d("TEST", "searchLocation input: " + input);
+                new GetJSONTask().execute(input);
+//                Log.d("TEST", "searchLocation input: " + input);
+//                String request_url = GEOCODE_URL + "json?address=" + input + "&key=" + getResources().getString(R.string.google_api_key);
+//                Log.d("TEST", request_url);
+//                // Geocoder connection
+//                try {
+//                    URL obj = new URL(request_url);
+//                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//                    con.setRequestMethod("GET");
+//                    int responseCode = con.getResponseCode();
+//                    Log.d("TEST", "Response code: " + responseCode);
+//                    if(responseCode == HttpURLConnection.HTTP_OK) {
+//                        Log.d("TEST", "http ok...");
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 
@@ -167,4 +188,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Log.d("TEST", "leaving onResume");
     }
 
+
+    private class GetJSONTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String input = strings[0];
+            Log.d("TEST", "searchLocation input: " + input);
+            String request_url = GEOCODE_URL + "json?address=" + input + "&key=" + getResources().getString(R.string.google_api_key);
+            Log.d("TEST", request_url);
+            // Geocoder connection
+            try {
+                URL obj = new URL(request_url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                int responseCode = con.getResponseCode();
+                Log.d("TEST", "Response code: " + responseCode);
+                if(responseCode == HttpURLConnection.HTTP_OK) {
+                    Log.d("TEST", "http ok...");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 }
