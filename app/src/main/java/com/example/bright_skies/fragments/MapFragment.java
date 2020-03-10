@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.bright_skies.R;
@@ -43,6 +41,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
     private Button searchEnter;
+    private Button dummyButton;
+    private EditText dummyText;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
@@ -55,6 +55,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //        }
         searchEnter = (Button) root.findViewById(R.id.search_button);
         searchEnter.setEnabled(false);
+
+        dummyButton = (Button) root.findViewById(R.id.dummybutton);
+        dummyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                getSolarInfo(v);
+            }
+        });
+
         textInput = (EditText) root.findViewById(R.id.location_input);
         textInput.setHint("Enter location");
         textInput.addTextChangedListener(new TextWatcher() {
@@ -77,6 +86,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
         return root;
+    }
+
+
+    // future parameters: int latitude, int longitude
+    public void getSolarInfo(View view) {
+        try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream())) {
+            String formated_s = s.useDelimiter("\\A").next();
+
+            String one = "avg_dni";
+            String two = "";
+
+            String delims = "[,]+";
+            String[] tokens = formated_s.split(delims);
+
+            String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]", "");
+            String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]", "");
+            String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]", "");
+
+            System.out.println("avg_dni:" + avg_dni + ", avg_ghi: " + avg_ghi + ", lat_tilt: " + lat_tilt);
+        }
+        catch (Exception e) {
+            return;
+        }
     }
 
     public void enableSearch(CharSequence s) {
@@ -140,5 +172,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onResume();
         Log.d("TEST", "leaving onResume");
     }
+
+
 
 }

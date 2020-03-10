@@ -44,4 +44,6 @@
     <string name="menu_results">Results</string>
     <string name="menu_map">Map</string>
     <string name="menu_category_info">App Information</string>
+
+    <string name="nrel_api_key">4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU</string>
 </resources>

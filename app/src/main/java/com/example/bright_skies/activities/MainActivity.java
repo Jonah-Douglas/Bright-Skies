@@ -34,17 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.content_frame, new MapFragment());
-//
-//
-//        Fragment current = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
-//        if (current instanceof AboutUsFragment) {
-//            fragmentTransaction.hide(current);
-//        }
-//
-//        fragmentTransaction.commit();
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -59,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-//        MapFragment mapFragment = new MapFragment();
-//        swapFragment(mapFragment);
     }
 
     @Override
