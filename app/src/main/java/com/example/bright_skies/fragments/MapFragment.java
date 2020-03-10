@@ -60,7 +60,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         dummyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                getSolarInfo(v);
+                try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream())) {
+                    String formated_s = s.useDelimiter("\\A").next();
+
+                    String delims = "[,]+";
+                    String[] tokens = formated_s.split(delims);
+
+                    String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]", "");
+                    String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]", "");
+                    String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]", "");
+
+                    Log.d("TEST2", avg_dni);
+                }
+                catch (Exception e) {
+                    Log.d("TEST2", "failed");
+                    return;
+                }
             }
         });
 
@@ -94,9 +109,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream())) {
             String formated_s = s.useDelimiter("\\A").next();
 
-            String one = "avg_dni";
-            String two = "";
-
             String delims = "[,]+";
             String[] tokens = formated_s.split(delims);
 
@@ -104,7 +116,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]", "");
             String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]", "");
 
+
             System.out.println("avg_dni:" + avg_dni + ", avg_ghi: " + avg_ghi + ", lat_tilt: " + lat_tilt);
+
+            Log.d("TEST", avg_dni);
         }
         catch (Exception e) {
             return;
