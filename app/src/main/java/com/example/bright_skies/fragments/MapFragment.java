@@ -33,10 +33,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.Objects;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
@@ -206,6 +211,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 Log.d("TEST", "Response code: " + responseCode);
                 if(responseCode == HttpURLConnection.HTTP_OK) {
                     Log.d("TEST", "http ok...");
+                    InputStream in = new BufferedInputStream(con.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuffer buffer = new StringBuffer();
+                    String line = "";
+                    while ((line = reader.readLine()) != null) {
+                        buffer.append(line + "\n");
+                        Log.d("TEST", "> " + line);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
