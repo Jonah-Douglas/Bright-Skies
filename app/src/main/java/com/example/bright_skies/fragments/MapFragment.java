@@ -43,8 +43,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
     private Button searchEnter;
+    private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
+    private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /**
+         * Inflate View
+         */
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 //        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.mapView);
 //        mapFragment.getMapAsync(this);
@@ -53,8 +58,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //            != PackageManager.PERMISSION_GRANTED) {
 //            ActivityCompat.requestPermissions(MainActivity, Manifest.permission.ACCESS_FINE_LOCATIONS);
 //        }
-        searchEnter = (Button) root.findViewById(R.id.search_button);
-        searchEnter.setEnabled(false);
+
+        /**
+         * Search Button and Text Input
+         */
         textInput = (EditText) root.findViewById(R.id.location_input);
         textInput.setHint("Enter location");
         textInput.addTextChangedListener(new TextWatcher() {
@@ -72,7 +79,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+        searchEnter = (Button) root.findViewById(R.id.search_button);
+        searchEnter.setEnabled(false);
+        searchEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = textInput.getText().toString();
+                input = input.replaceAll("\\s","+");
+                Log.d("TEST", "searchLocation input: " + input);
+            }
+        });
 
+        /**
+         * Map View
+         */
         mMapView = (MapView) root.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
@@ -82,6 +102,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void enableSearch(CharSequence s) {
         boolean textPresent = (s.length() > 0);
         searchEnter.setEnabled(textPresent);
+    }
+
+    public void searchLocation() {
+        String input = textInput.getText().toString();
+        input = input.replaceAll("\\s","+");
+        Log.d("TEST", "searchLocation input: " + input);
     }
 
     @Override
