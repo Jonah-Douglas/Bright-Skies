@@ -69,6 +69,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
     private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
     private final String NREL_URL = "https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU";
+    private double lat;
+    private double lng;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**
@@ -159,11 +161,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 if (task.isSuccessful()) {
                     Log.d("TEST","entered successful");
                     Location location = task.getResult();
-                    double lat = location.getLatitude();
-                    double lon = location.getLongitude();
-                    LatLng userLatLng = new LatLng(lat, lon);
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                    LatLng userLatLng = new LatLng(lat, lng);
                     Log.d("TEST", "last known lat: " + String.valueOf(lat));
-                    Log.d("TEST", "last known lng: " + String.valueOf(lon));
+                    Log.d("TEST", "last known lng: " + String.valueOf(lng));
                     CameraPosition cam_pos = new CameraPosition.Builder()
                             .target(userLatLng)
                             .zoom(18)
@@ -179,7 +181,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMyLocationEnabled(true);
 
     }
-
+//    private void updateLatLng(double lat, double lng) {
+//        this.lat = lat;
+//        this.lng = lng;
+//        LatLng userLatLng = new LatLng(lat, lng);
+//        CameraPosition cam_pos = new CameraPosition.Builder()
+//                .target(userLatLng)
+//                .zoom(18)
+//                .tilt(45)
+//                .build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cam_pos));
+////                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 20));
+//        googleMap.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
+//    }
     @Override
     public void onPause() {
         mMapView.onPause();
@@ -216,6 +230,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //                        Log.d("TEST", "geometry object:" + geometry.toString());
                         JSONObject location = geometry.getJSONObject("location");
                         Log.d("TEST", "Location: " + location.toString(2));
+                        lat = Double.parseDouble(location.getString("lat").toString());
+                        lng = Double.parseDouble(location.getString("lng").toString());
+                        Log.d("TEST", "new lat:" + lat + "\tnew lng: " + lng);
                     } catch (JSONException e) {
                         Log.d("TEST", "failed to get geometry");
                         e.printStackTrace();
