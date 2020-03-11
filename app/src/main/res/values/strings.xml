@@ -12,7 +12,6 @@
     <string name="enter_location">Enter Your Location</string>
     <string name="navigation">nav</string>
     <string name="location_search">Location Search</string>
-    <string name="saved_searches">Saved Searches</string>
     <string name="energy_calculator">Energy Calculator</string>
     <string name="information">Information</string>
     <string name="faqs">FAQs</string>
@@ -51,6 +50,8 @@
     <string name="menu_information">Information</string>
     <string name="menu_results">Results</string>
     <string name="menu_map">Map</string>
-    <string name="menu_saved_searches">Saved Searches</string>
     <string name="menu_category_info">App Information</string>
+
+    <string name="nrel_api_key">4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU</string>
+    <string name="nrel_url_base">https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=</string>
 </resources>

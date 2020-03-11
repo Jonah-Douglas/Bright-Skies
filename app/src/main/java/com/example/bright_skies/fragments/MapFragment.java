@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Cache;
@@ -65,9 +63,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
     private Button searchEnter;
+    private Button dummyButton;
+    private EditText dummyText;
     private RequestQueue requestQueue;
     private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
     private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
+    private final String NREL_URL = "https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU";
     private double lat;
     private double lng;
 
@@ -76,13 +77,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
          * Inflate View
          */
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-//        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.mapView);
-//        mapFragment.getMapAsync(this);
+
         Bundle mapViewBundle = null;
-//        if (ContextCompat.checkSelfPermission(MainActivity, Manifest.permission.ACCESS_FINE_LOCATION)
-//            != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(MainActivity, Manifest.permission.ACCESS_FINE_LOCATIONS);
-//        }
+
+        searchEnter = (Button) root.findViewById(R.id.search_button);
+        searchEnter.setEnabled(false);
+
+        dummyButton = (Button) root.findViewById(R.id.dummybutton);
+        dummyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                String[] input = {"40", "130"};  //TODO: get actual lat & long
+                new GetSolarInfoTask().execute(input);
+            }
+        });
+
 
         requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()).getApplicationContext());
         /**
@@ -129,12 +138,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         boolean textPresent = (s.length() > 0);
         searchEnter.setEnabled(textPresent);
     }
-
-//    public void searchLocation() {
-//        String input = textInput.getText().toString();
-//        input = input.replaceAll("\\s","+");
-//        Log.d("TEST", "searchLocation input: " + input);
-//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -246,4 +249,46 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return null;
         }
     }
+
+    private class GetSolarInfoTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String latitude = strings[0];
+            String longitude = strings[1];
+            String request_url = NREL_URL + "&lat=" + latitude + "&lon=" + longitude;
+
+            Log.d("TEST2", request_url);
+            
+            java.io.InputStream ss = null;
+            java.util.Scanner s = null;
+
+            try {
+                ss = new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                s = new java.util.Scanner(ss);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String formatted_s = s.useDelimiter("\\A").next();
+            String delims = "[,]+";
+            String[] tokens = formatted_s.split(delims);
+
+            String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]","");
+            String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]","");
+            String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]","");
+
+            Log.d("TEST2", "avg_dni:" + avg_dni);
+            Log.d("TEST2", "avg_ghi:" + avg_ghi);
+            Log.d("TEST2", "lat_tilt:" + lat_tilt);
+
+            return null;
+        }
+    }
+
 }

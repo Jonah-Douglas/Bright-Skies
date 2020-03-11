@@ -34,24 +34,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.content_frame, new MapFragment());
-//
-//
-//        Fragment current = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
-//        if (current instanceof AboutUsFragment) {
-//            fragmentTransaction.hide(current);
-//        }
-//
-//        fragmentTransaction.commit();
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_map, R.id.nav_saved_searches, R.id.nav_calculator,
+                R.id.nav_map, R.id.nav_calculator,
                 R.id.nav_information, R.id.nav_faq, R.id.nav_about_us)
                 .setDrawerLayout(drawer)
                 .build();
@@ -59,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-//        MapFragment mapFragment = new MapFragment();
-//        swapFragment(mapFragment);
     }
 
     @Override

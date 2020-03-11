@@ -42,9 +42,4 @@
         android:label="@string/menu_results"
         tools:layout="@layout/fragment_results" />
 
-    <fragment
-        android:id="@+id/nav_saved_searches"
-        android:name="com.example.bright_skies.fragments.SavedSearchesFragment"
-        android:label="@string/menu_saved_searches"
-        tools:layout="@layout/fragment_saved_searches" />
 </navigation>

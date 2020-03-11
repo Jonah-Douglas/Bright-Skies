@@ -18,3 +18,4 @@ Run Our Application:
 At this point, you should see our application loaded on a phone emulator, and be able to interact with it! 
 
 
+![  ](https://github.com/piperwolters/bright-skies/blob/master/3-33799_panels-collections-at-sccpre-cat-flex-energy-solar.png)
