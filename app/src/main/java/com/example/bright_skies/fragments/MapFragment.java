@@ -63,8 +63,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
     private Button searchEnter;
-    private Button dummyButton;
-    private EditText dummyText;
     private RequestQueue requestQueue;
     private final String PLACES_URL = "https:/maps.googleapis.com/maps/api/place/autocomplete/";
     private final String GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/";
@@ -82,15 +80,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         searchEnter = (Button) root.findViewById(R.id.search_button);
         searchEnter.setEnabled(false);
-
-        dummyButton = (Button) root.findViewById(R.id.dummybutton);
-        dummyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                String[] input = {"40", "130"};  //TODO: get actual lat & long
-                new GetSolarInfoTask().execute(input);
-            }
-        });
 
 
         requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()).getApplicationContext());
@@ -122,6 +111,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 String input = textInput.getText().toString();
                 input = input.replaceAll("\\s","+");
                 new GetJSONTask().execute(input);
+
+                String[] input2 = {Double.toString(lat), Double.toString(lng)};
+                new GetSolarInfoTask().execute(input2);
             }
         });
 
@@ -194,6 +186,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 ////                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 20));
 //        googleMap.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
 //    }
+
     @Override
     public void onPause() {
         mMapView.onPause();
