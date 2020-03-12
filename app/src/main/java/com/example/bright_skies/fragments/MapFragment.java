@@ -251,34 +251,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             String longitude = strings[1];
             String request_url = NREL_URL + "&lat=" + latitude + "&lon=" + longitude;
 
-            Log.d("TEST2", request_url);
-            
-            java.io.InputStream ss = null;
-            java.util.Scanner s = null;
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(request_url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("TEST", "Response: " + response.toString(2));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    
+                }
 
-            try {
-                ss = new java.net.URL("https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=4eE4mdyQSmbhnkpcNjv9FIjen1ZgLXf0cGSxQReU&lat=44&lon=-105").openStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            }, new Response.ErrorListener() {
 
-            try {
-                s = new java.util.Scanner(ss);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("TEST", "JSON Error: " + error.toString());
+                }
+            });
 
-            String formatted_s = s.useDelimiter("\\A").next();
-            String delims = "[,]+";
-            String[] tokens = formatted_s.split(delims);
 
-            String avg_dni = tokens[7].replaceAll("[^0-9?!\\.]","");
-            String avg_ghi = tokens[20].replaceAll("[^0-9?!\\.]","");
-            String lat_tilt = tokens[33].replaceAll("[^0-9?!\\.]","");
-
-            Log.d("TEST2", "avg_dni:" + avg_dni);
-            Log.d("TEST2", "avg_ghi:" + avg_ghi);
-            Log.d("TEST2", "lat_tilt:" + lat_tilt);
+//            Log.d("TEST2", "avg_dni:" + avg_dni);
+//            Log.d("TEST2", "avg_ghi:" + avg_ghi);
+//            Log.d("TEST2", "lat_tilt:" + lat_tilt);
 
             return null;
         }
