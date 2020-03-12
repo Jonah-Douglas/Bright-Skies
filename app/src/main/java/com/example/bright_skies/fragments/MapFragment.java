@@ -259,9 +259,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    
                 }
-
             }, new Response.ErrorListener() {
 
                 @Override
@@ -270,10 +268,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }
             });
 
-
-//            Log.d("TEST2", "avg_dni:" + avg_dni);
-//            Log.d("TEST2", "avg_ghi:" + avg_ghi);
-//            Log.d("TEST2", "lat_tilt:" + lat_tilt);
+            requestQueue.add(jsonRequest);
 
             return null;
         }
