@@ -17,4 +17,17 @@ public class ResultsFragment extends Fragment {
 
         return root;
     }
+
+    public String solarRecommendation(int dni) {
+        String result;
+
+        if (dni < 1000) {
+            result = "Your location does not have the required solar irradiance to allow for solar panels to be viable";
+        } else if (dni < 1500) {
+            result = "Average";
+        } else {
+            result = "Good";
+        }
+    }
+
 }
