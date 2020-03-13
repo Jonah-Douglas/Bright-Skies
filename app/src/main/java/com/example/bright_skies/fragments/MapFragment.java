@@ -218,9 +218,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     }
                     try {
                         JSONObject results = (JSONObject) response.getJSONArray("results").get(0);
-//                        Log.d("TEST", "results: " + results.toString(2));
                         JSONObject geometry = results.getJSONObject("geometry");
-//                        Log.d("TEST", "geometry object:" + geometry.toString());
                         JSONObject location = geometry.getJSONObject("location");
                         Log.d("TEST", "Location: " + location.toString(2));
                         lat = Double.parseDouble(location.getString("lat").toString());
@@ -255,10 +253,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        Log.d("TEST", "Response: " + response.toString(2));
+                        Log.d("TEST2", "Response: " + response.toString(2));
                     } catch (JSONException e) {
+                        Log.d("TEST2", "ah1");
                         e.printStackTrace();
                     }
+
+                    try {
+                        JSONObject outputs = response.getJSONObject("outputs");
+
+                        JSONObject avgdni = outputs.getJSONObject("avg_dni");
+                        double annual = Double.parseDouble(avgdni.getString("annual"));
+                        Log.d("TEST3", "Annual avg dni: " + annual);
+
+                        JSONObject avgghi = outputs.getJSONObject("avg_ghi");
+                        double annual2 = Double.parseDouble(avgghi.getString("annual"));
+                        Log.d("TEST3", "Annual avg ghi: " + annual2);
+
+                        JSONObject avglattilt = outputs.getJSONObject("avg_lat_tilt");
+                        double annual3 = Double.parseDouble(avglattilt.getString("annual"));
+                        Log.d("TEST3", "Annual avg lat tilt: " + annual3);
+
+                    } catch (JSONException e) {
+                        Log.d("TEST3", "ah2");
+                        e.printStackTrace();
+                    }
+
+
                 }
             }, new Response.ErrorListener() {
 
