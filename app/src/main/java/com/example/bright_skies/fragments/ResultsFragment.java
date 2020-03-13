@@ -28,6 +28,8 @@ public class ResultsFragment extends Fragment {
         } else {
             result = "Good";
         }
+
+        return result;
     }
 
 }
