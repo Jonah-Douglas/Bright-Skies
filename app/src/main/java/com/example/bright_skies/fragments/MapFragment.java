@@ -59,6 +59,7 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     private MapView mMapView;
+    private GoogleMap mGoogleMap;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private EditText textInput;
@@ -131,21 +132,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         searchEnter.setEnabled(textPresent);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
-        }
-
-        mMapView.onSaveInstanceState(mapViewBundle);
+    private void updateMapLatLng() {
+        LatLng new_lat_lng = new LatLng(lat, lng);
+        CameraPosition cam_pos = new CameraPosition.Builder()
+                .target(new_lat_lng)
+                .zoom(18)
+                .tilt(45)
+                .build();
+        mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cam_pos));
+//                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 20));
+        mGoogleMap.addMarker(new MarkerOptions().position(new_lat_lng).title("Your Location"));
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+        mGoogleMap = googleMap;
         mFusedLocationClient = getFusedLocationProviderClient(Objects.requireNonNull(getContext()));
         mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
@@ -158,14 +159,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     LatLng userLatLng = new LatLng(lat, lng);
                     Log.d("TEST", "last known lat: " + String.valueOf(lat));
                     Log.d("TEST", "last known lng: " + String.valueOf(lng));
-                    CameraPosition cam_pos = new CameraPosition.Builder()
-                            .target(userLatLng)
-                            .zoom(18)
-                            .tilt(45)
-                            .build();
-                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cam_pos));
-//                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 20));
-                    googleMap.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
+                    updateMapLatLng();
                 }
             }
         });
@@ -173,19 +167,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMyLocationEnabled(true);
 
     }
-//    private void updateLatLng(double lat, double lng) {
-//        this.lat = lat;
-//        this.lng = lng;
-//        LatLng userLatLng = new LatLng(lat, lng);
-//        CameraPosition cam_pos = new CameraPosition.Builder()
-//                .target(userLatLng)
-//                .zoom(18)
-//                .tilt(45)
-//                .build();
-//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cam_pos));
-////                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 20));
-//        googleMap.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
-//    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mMapView.onSaveInstanceState(mapViewBundle);
+    }
 
     @Override
     public void onPause() {
@@ -226,6 +220,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         lat = Double.parseDouble(location.getString("lat").toString());
                         lng = Double.parseDouble(location.getString("lng").toString());
                         Log.d("TEST", "new lat:" + lat + "\tnew lng: " + lng);
+                        updateMapLatLng();
                     } catch (JSONException e) {
                         Log.d("TEST", "failed to get geometry");
                         e.printStackTrace();
