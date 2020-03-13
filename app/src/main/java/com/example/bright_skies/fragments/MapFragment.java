@@ -16,6 +16,8 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Cache;
 import com.android.volley.Request;
@@ -71,6 +73,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private double lat;
     private double lng;
 
+    //WHY DOES SDK HATE THIS? IMMEDIATELY CLOSES APP
+    FragmentManager fragmentManager = getChildFragmentManager();
+    FragmentTransaction goToResults = fragmentManager.beginTransaction();
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**
          * Inflate View
@@ -115,6 +121,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                 String[] input2 = {Double.toString(lat), Double.toString(lng)};
                 new GetSolarInfoTask().execute(input2);
+
+                /*ResultsFragment results = new ResultsFragment();
+                FragmentTransaction goToResults = getFragmentManager().beginTransaction();
+                goToResults.replace(R.id.fragment_map, ResultsFragment);
+                goToResults.commit();*/
+                /*switch (v.getId()) {
+                    case R.id.search_button:
+                        ResultsFragment results = new ResultsFragment();
+                        goToResults.replace(R.id.nav_map, results);
+                        goToResults.addToBackStack(null);
+
+                        goToResults.commit();
+                    break;
+                }*/
             }
         });
 
