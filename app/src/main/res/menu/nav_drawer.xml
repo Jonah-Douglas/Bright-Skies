@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_map_icon"
             android:title="@string/menu_map" />
         <item
+            android:id="@+id/nav_results"
+            android:icon="@drawable/ic_results_icon"
+            android:title="@string/location_results" />
+        <item
             android:id="@+id/nav_calculator"
             android:icon="@drawable/ic_calculator_icon"
             android:title="@string/menu_calculator" />

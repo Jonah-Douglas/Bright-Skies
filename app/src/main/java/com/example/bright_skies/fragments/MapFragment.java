@@ -74,8 +74,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private double lng;
 
     //WHY DOES SDK HATE THIS? IMMEDIATELY CLOSES APP
-    FragmentManager fragmentManager = getChildFragmentManager();
-    FragmentTransaction goToResults = fragmentManager.beginTransaction();
+    /*FragmentManager fragmentManager = getChildFragmentManager();
+    FragmentTransaction goToResults = fragmentManager.beginTransaction();*/
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /**

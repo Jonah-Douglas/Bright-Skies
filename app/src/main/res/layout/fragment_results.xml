@@ -4,20 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/about_intro"
-        android:layout_width="277dp"
-        android:layout_height="327dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginBottom="157dp"
-        android:fontFamily="cursive"
-        android:text="Results!!!!"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/main_blue"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
