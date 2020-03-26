@@ -4,7 +4,7 @@ Developers: Melody Grappo, Zack Doll, Jonah Douglas, Piper Wolters
 
 ***
 
-This application aims to inform users about solar energy and how realistic it is, based on the user's location. We provide a mpa interface for users to enter their location, and we output statistics regarding environmental and monetary benefits. Other features include an energy calculator to explain what a kilowatt hour really is, frequently asked questions, general information about solar panels, and an about us page describing the team.
+This application aims to inform users about solar energy and how realistic it is, based on the user's location. We provide a map interface for users to enter their location, and we output statistics regarding environmental and monetary benefits. Other features include an energy calculator to explain what a kilowatt hour really is, frequently asked questions, general information about solar panels, and an about us page describing the team.
 
 ***
 
